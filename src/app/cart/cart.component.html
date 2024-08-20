@@ -1,0 +1,54 @@
+<div class="cart-container">
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Product Name</th>
+        <th>Artist</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems" class="placeholder-wave">
+        <td><img height="80px" [src]="item.image" alt="{{ item.name }}"></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.artist }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price | currency:'EUR' }}</td>
+        <td>{{ item.quantity * item.price | currency:'EUR' }}</td>
+        <td>
+          <button (click)="onDecreaseQtty(item)" class="btn-decrease">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button (click)="onDelete(item)" class="btn-delete">
+            <i class="fas fa-trash"></i>
+          </button>
+          <button (click)="onIncreaseQtty(item)" class="btn-increase">
+            <i class="fas fa-plus"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="5" class="text-right">Total:</th>
+        <th colspan="2">{{ total | currency:'EUR' }}</th>
+      </tr>
+      <tr>
+        <th colspan="5" class="text-right">Service Charge (10%):</th>
+        <th colspan="2">{{ serviceCharge | currency:'EUR' }}</th>
+      </tr>
+      <tr *ngIf="discount > 0">
+        <th colspan="5" class="text-right">Discount (15%):</th>
+        <th colspan="2">-{{ discount | currency:'EUR' }}</th>
+      </tr>
+      <tr>
+        <th colspan="5" class="text-right">Final Total:</th>
+        <th colspan="2">{{ finalTotal | currency:'EUR' }}</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
